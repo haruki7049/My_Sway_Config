@@ -1,12 +1,11 @@
-# Variables
-    set $mod Mod4
-    set $left h
-    set $down j
-    set $up k
-    set $right l
-    set $term xterm
-    set $browser chromium --ozone-platform-hint=auto
-    # TO DO: set menu application as dmenu.
+set $mod Mod4
+set $browser chromium --ozone-platform-hint=auto
+set $term xterm
+set $left h
+set $down j
+set $up k
+set $right l
+# TO DO: set menu application as dmenu.
 
 # Output configuration
 #
@@ -33,14 +32,12 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 # Input configuration
-    # US
-    input * {
-        xkb_layout "us"
-    }
-    # JP
-    #input * {
-    #    xkb_layout "jp"
-    #}
+input * {
+    xkb_layout "us"
+}
+#input * {
+#    xkb_layout "jp"
+#}
 
 # Key bindings
 # Basics:
@@ -166,7 +163,7 @@ mode "resize" {
 # Status Bar:
 bar {
     # When the status_command prints a new line to stdout, swaybar updates.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+    status_command while date +'%Y-%m-%d %p %I:%M:%S'; do sleep 1; done
     position top
     
     colors {
