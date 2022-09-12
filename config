@@ -1,17 +1,20 @@
 set $mod Mod4
-set $browser chromium --ozone-platform-hint=auto
-set $term wezterm
+set $term urxvt
+set $browser chromium
+set $IME fcitx5
 
-# common binds
+font pango:monospace 8
+
+# common bind
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+b exec $browser
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+r mode "resize"
+bindsym $mod+Shift+a mode "Apps"
 
 # change focus
 bindsym $mod+Left focus left
@@ -25,72 +28,96 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
-
-
+# split in either horizontal or vertical
 bindsym $mod+h split h
 bindsym $mod+v split v
 
-# Switch the current container between different layout styles
+# enter fullscreen mode
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# Make the current focus fullscreen
-bindsym $mod+f fullscreen
-
-# Toggle the current focus between tiling and floating mode
+# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# Swap focus between the tiling area and the floating area
+# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# Move focus to the parent container
+# focus the parent container
 bindsym $mod+a focus parent
+
+# focus the child container
 bindsym $mod+d focus child
 
-# Resizing containers
+# screen lock
+bindsym $mod+l exec i3lock
+
+# set workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# resize window (you can also use the mouse for that)
 mode "resize" {
-    bindsym left resize shrink width 10px
-    bindsym down resize grow height 10px
-    bindsym up resize shrink height 10px
-    bindsym right resize grow width 10px
+        bindsym Left resize shrink width 10 px
+        bindsym Down resize grow height 10 px
+        bindsym Up resize shrink height 10 px
+        bindsym Right resize grow width 10 px
 
-    bindsym Escape mode "default"
+        bindsym Escape mode "default"
 }
 
-# bar settings
+mode "Apps"{
+	bindsym $mod+Return exec $term
+	bindsym $mod+Shift+q kill
+	bindsym $mod+Shift+b exec $browser
+	bindsym $mod+Shift+f exec $IME
+	bindsym $mod+Shift+d exec discord
+	bindsym $mod+Shift+s exec steam
+	bindsym $mod+Shift+p exec "1password"
+	bindsym $mod+Shift+m exec code
+	bindsym $mod+Shift+u exec /opt/unityhub/unityhub
+	bindsym $mod+Shift+v exec gvim
+
+	bindsym Escape mode "default"
+}
+
+# i3bar settings
 bar {
-    status_command while date; do sleep 1; done
-    position bottom
+        status_command while date; do sleep 1; done
+	position bottom
 }
-
-# Input configuration
-input * {
-    xkb_layout "us"
-}
-#input * {
-#    xkb_layout "jp"
-#}
