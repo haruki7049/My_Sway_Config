@@ -112,7 +112,19 @@ mode "Apps"{
 	bindsym $mod+Shift+m exec code
 	bindsym $mod+Shift+u exec /opt/unityhub/unityhub
 	bindsym $mod+Shift+v exec gvim
+	
+	# change focus
+	bindsym $mod+Left focus left
+	bindsym $mod+Down focus down
+	bindsym $mod+Up focus up
+	bindsym $mod+Right focus right
 
+	# move focused window
+	bindsym $mod+Shift+Left move left
+	bindsym $mod+Shift+Down move down
+	bindsym $mod+Shift+Up move up
+	bindsym $mod+Shift+Right move right
+	
 	bindsym Escape mode "default"
 }
 
