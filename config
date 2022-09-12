@@ -8,6 +8,8 @@ font pango:monospace 8
 # common bind
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
+bindsym $mod+Shift+b exec $browser
+bindsym $mod+Shift+f exec $IME
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
