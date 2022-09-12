@@ -1,1 +1,2 @@
-Maybe, I will use in i3-wm too.
+I use in i3-wm mainly but it is able to use in sway.
+~~Maybe...~~
